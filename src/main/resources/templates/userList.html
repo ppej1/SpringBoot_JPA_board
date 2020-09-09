@@ -16,20 +16,42 @@
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">Time</a>
+	      <a class="navbar-brand" href="/">Time</a>
 	    </div>
 
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="/form.html">회원가입</a></li>
-	        <li><a href="/form.html">회원목록</a></li>	        	        
+	        <li><a href="/register">회원가입</a></li>
+	        <li><a href="/helloworld">회원목록</a></li>	        	        
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
-
-
-
-
+	
+	<div class="container">
+		<div class="panel panel-default">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading">UserList</div>
+		  <!-- Table -->
+		  <table class="table">
+			<thead>
+				<tr>
+					<th>사용자 아이디</th>
+					<th>이름</th>
+					<th>이메일</th>										
+				</tr>
+			</thead>
+			<tbody>
+			{{#users}}
+				<tr>
+					<td scope="row">{{userId}}</td>
+					<td>{{userId}}</td>
+					<td>{{email}}</td>										
+				</tr>	
+			{{/users}}		
+			</tbody>
+		  </table>
+		</div>
+	</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
