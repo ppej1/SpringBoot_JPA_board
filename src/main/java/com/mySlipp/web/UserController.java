@@ -13,10 +13,10 @@ import com.mySlipp.DTO.User;
 public class UserController {
 	private List<User> users = new ArrayList<User>();
 	
-	@RequestMapping("/")
+/*	@RequestMapping("/")
 	public String home(){
 		return "index";
-	}
+	}*/
 	@RequestMapping("/register")
 	public String registerform(){
 		return "registerForm";
