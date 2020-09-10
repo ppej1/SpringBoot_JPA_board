@@ -3,6 +3,8 @@ package com.mySlipp.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +27,30 @@ public class UserController {
 	public String registerPage(){
 		return "/user/form";
 	}
-	@RequestMapping("/login")
+	@RequestMapping("/create")
+	public String createUser(User user){
+		System.out.println(user);
+		userRepository.save(user);
+		return "redirect:/";
+	}
+	@RequestMapping("/loginForm")
 	public String loginPage(){
 		return "/user/login";
 	}
+	@RequestMapping("/login")
+	public String login(String userId,String password, HttpSession session){
+		User user = userRepository.findByUserId(userId);
+		if(user== null){
+			return "redirect:/user/loginForm";
+		}
+		if(!password.equals(user.getPassword())){
+			return "redirect:/user/loginForm";
+		}
+		session.setAttribute("user", user);
+		
+		return "redirect:/";
+	}
+	
 	@RequestMapping("/profile")
 	public String profilePage(){
 		return "/user/profile";
@@ -48,14 +70,6 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	
-	
-	@RequestMapping("/create")
-	public String createUser(User user){
-		System.out.println(user);
-		userRepository.save(user);
-		return "redirect:/";
-	}
 	@RequestMapping("/list")
 	public String userList(Model model){
 		model.addAttribute("users",userRepository.findAll());
