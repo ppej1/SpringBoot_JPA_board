@@ -50,7 +50,11 @@ public class UserController {
 		
 		return "redirect:/";
 	}
-	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session){
+		session.removeAttribute("user");
+		return "redirect:/";
+	}
 	@RequestMapping("/profile")
 	public String profilePage(){
 		return "/user/profile";
