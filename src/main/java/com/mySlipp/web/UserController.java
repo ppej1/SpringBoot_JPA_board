@@ -46,13 +46,13 @@ public class UserController {
 		if(!password.equals(user.getPassword())){
 			return "redirect:/user/loginForm";
 		}
-		session.setAttribute("user", user);
+		session.setAttribute("loginUser", user);
 		
 		return "redirect:/";
 	}
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
-		session.removeAttribute("user");
+		session.removeAttribute("loginUser");
 		return "redirect:/";
 	}
 	@RequestMapping("/profile")
@@ -60,13 +60,30 @@ public class UserController {
 		return "/user/profile";
 	}
 	@RequestMapping("/{id}/form")
-	public String updateForm(@PathVariable Long id, Model model){
+	public String updateForm(@PathVariable Long id, Model model, HttpSession session){
+		Object tempUser = session.getAttribute("loginUser");
+		if(tempUser == null){
+			return "redirect:/user/login";
+		}
+		User loginUser = (User)tempUser;
+		if(!id.equals(loginUser.getId())){
+			return "redirect:/";
+		}
 		User user = userRepository.findById(id).get(); 
 		model.addAttribute("user", user);
 		return "/user/updateForm";
 	}
 	@RequestMapping("/update/{id}")
-	public String UpdateUser(@PathVariable Long id, User updateUser){
+	public String UpdateUser(@PathVariable Long id, User updateUser, HttpSession session){
+		Object tempUser = session.getAttribute("loginUser");
+		if(tempUser == null){
+			return "redirect:/user/login";
+		}
+		User loginUser = (User)tempUser;
+		if(!id.equals(loginUser.getId())){
+			return "redirect:/";
+		}
+		
 		User user = userRepository.findById(id).get(); 
 		user.update(updateUser);
 		System.out.println(user);
