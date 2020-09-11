@@ -40,6 +40,8 @@ public class Question {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return String.format("Question [QuestId=%s, WriterId=%s, title=%s, contents=%s]", QuestId, WriterId, title,
