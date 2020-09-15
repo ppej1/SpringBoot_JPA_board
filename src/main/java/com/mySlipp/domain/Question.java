@@ -1,11 +1,20 @@
 package com.mySlipp.domain;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 @Entity
 public class Question {
@@ -13,46 +22,43 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long QuestId;
 	
-	private Long WriterId;
+	@ManyToOne
+	@JoinColumn(foreignKey = @ForeignKey(name = "fk_question_writer"))
+	private User writer;
 	private String title;
+	@Lob
 	private String contents;
-	public Long getQuestId() {
-		return QuestId;
-	}
-	public void setQuestId(Long questId) {
-		QuestId = questId;
-	}
-	public Long getWriterId() {
-		return WriterId;
-	}
-	public void setWriterId(Long writerId) {
-		WriterId = writerId;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
+	private LocalDateTime createDate;
+	@OneToMany(mappedBy= "question")
+	@OrderBy("id ASC")
+	private List<Answer> answers;
+	
+	public Question(){}
+	public Question(User writer, String title, String contents) {
+		this.writer = writer;
 		this.title = title;
-	}
-	public String getContents() {
-		return contents;
-	}
-	public void setContents(String contents) {
 		this.contents = contents;
+		this.createDate = LocalDateTime.now();
 	}
-	
-	
+	public String getFormattedCreateDate(){
+		if(createDate == null){
+			return "";
+			}
+		return createDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+	}
 	@Override
 	public String toString() {
-		return String.format("Question [QuestId=%s, WriterId=%s, title=%s, contents=%s]", QuestId, WriterId, title,
-				contents);
+		return String.format("Question [QuestId=%s, writer=%s, title=%s, contents=%s, createDate=%s]", QuestId, writer,
+				title, contents, createDate);
 	}
-	public Question(){}
-	public Question(Long writerId, String title, String contents) {
-		WriterId = writerId;
+	
+	public void update(String title, String contents){
 		this.title = title;
-		this.contents = contents;
+		this.contents =contents;
 	}
-	
-	
+	public boolean isSameWriter(User loginUser) {
+		
+		return this.writer.equals(loginUser);
+	}
+
 }
