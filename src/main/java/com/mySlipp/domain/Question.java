@@ -16,18 +16,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Question {
 	@Id
+	@JsonProperty
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long QuestId;
 	
 	@ManyToOne
+	@JsonProperty
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_question_writer"))
 	private User writer;
+	@JsonProperty
 	private String title;
 	@Lob
+	@JsonProperty
 	private String contents;
+	
 	private LocalDateTime createDate;
 	@OneToMany(mappedBy= "question")
 	@OrderBy("id ASC")

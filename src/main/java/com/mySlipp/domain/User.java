@@ -6,17 +6,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class User {
 	@Id
+	@JsonProperty
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
-	
+	@JsonProperty
 	@Column(nullable=false, length=20)
 	private String userId;
 	
 	private String password;
+	@JsonProperty
 	private String name;
+	@JsonProperty
 	private String email;
 	
 	public void setId(Long id) {
@@ -41,9 +46,6 @@ public class User {
 
 	public String getUserId() {
 		return userId;
-	}
-	public String getPassword() {
-		return password;
 	}
 	public String getName() {
 		return name;
