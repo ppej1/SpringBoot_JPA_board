@@ -37,8 +37,12 @@ public class Question {
 	
 	private LocalDateTime createDate;
 	@OneToMany(mappedBy= "question")
-	@OrderBy("id ASC")
+	@OrderBy("id DESC")
 	private List<Answer> answers;
+	
+	@JsonProperty
+	private Integer countOfAnswer =0;
+	
 	
 	public Question(){}
 	public Question(User writer, String title, String contents) {
@@ -66,6 +70,12 @@ public class Question {
 	public boolean isSameWriter(User loginUser) {
 		
 		return this.writer.equals(loginUser);
+	}
+	public void addAnswer() {
+		this.countOfAnswer+=1;
+	}
+	public void deleteAnswer(){
+		this.countOfAnswer -=1;
 	}
 
 }

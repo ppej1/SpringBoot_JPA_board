@@ -81,5 +81,9 @@ public class Answer {
 		return String.format("Answer [id=%s, writer=%s, contents=%s, createDate=%s]", id, writer, contents, createDate);
 	}
 
+	public boolean isSameWriter(User loginUser) {	
+		return loginUser.equals(this.writer);
+	}
+
 	
 }
