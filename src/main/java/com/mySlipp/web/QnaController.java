@@ -19,6 +19,12 @@ public class QnaController {
 	@Autowired
 	private QuestionRepository questionRepository;
 	
+	@RequestMapping("/qnaList")
+	public String QnAHome(Model model){
+		model.addAttribute("questions",questionRepository.findAll());
+		return "/qna/qnaList";
+	}
+	
 	
 	@RequestMapping("/form")
 	public String QuestionForm(HttpSession session){
@@ -36,7 +42,7 @@ public class QnaController {
 		Question newQuestion = new Question(sessionUser, title, contents);
 		questionRepository.save(newQuestion);
 		System.out.println(newQuestion);
-		return "redirect:/";
+		return "redirect:/question/qnaList";
 	}
 	
 	@RequestMapping("/{QuestId}")
@@ -78,7 +84,7 @@ public class QnaController {
 			Question question = questionRepository.findById(QuestId).get();
 			hasPermission(session, question);
 			questionRepository.deleteById(QuestId);
-			return "redirect:/";
+			return "redirect:/question/qnaList";
 
 		}catch(IllegalStateException e){
 			return "redirect:/user/login";

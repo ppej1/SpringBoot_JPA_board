@@ -1,107 +1,116 @@
 <!DOCTYPE html>
 <html lang="kr">
-	<head>
-{{>include/header}}
-	</head>
-{{>include/nav}}	
-	<body>
-<div class="container" id="main">
-    <div class="col-md-12 col-sm-12 col-lg-12">
-    {{#question}}
-        <div class="panel panel-default">
-          <header class="qna-header">
-              <h2 class="qna-title">{{title}}</h2>
-          </header>
-          <div class="content-main">
-              <article class="article">
-                  <div class="article-header">
-                      <div class="article-header-thumb">
-                          <img src="https://graph.facebook.com/v2.3/100000059371774/picture" class="article-author-thumb" alt="">
-                      </div>
-                      <div class="article-header-text">
-                          <a href="/users/92/kimmunsu" class="article-author-name">{{writer.name}}</a>
-                          <a href="/questions/413" class="article-header-time" title="퍼머링크">
-                              {{formattedCreateDate}}
-                              <i class="icon-link"></i>
-                          </a>
-                      </div>
-                  </div>
-                  <div class="article-doc">
-					{{contents}}
-                  </div>
-                  <div class="article-util">
-                      <ul class="article-util-list">
-                          <li>
-                              <a class="link-modify-article" href="/question/{{QuestId}}/form">수정</a>
-                          </li>
-                          <li>
-                              <form class="form-delete" action="/question/delete/{{QuestId}}" method="POST">
-                                  <input type="hidden" name="_method" value="DELETE">
-                                  <button class="link-delete-article" type="submit">삭제</button>
-                              </form>
-                          </li>
-                          <li>
-                              <a class="link-modify-article" href="/">목록</a>
-                          </li>
-                      </ul>
-                  </div>
-              </article>
+
+<head>
+    {{>include/header}}
+</head>
+
+<body>
+    <div class="wrapper">
+        {{>include/nav}}
+
+        <div class="container" id="main">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                {{#question}}
+                <div class="panel panel-default">
+                    <header class="qna-header">
+                        <h2 class="qna-title">{{title}}</h2>
+                    </header>
+                    <div class="content-main">
+                        <article class="article">
+                            <div class="article-header">
+                                <div class="article-header-thumb">
+                                    <img src="https://graph.facebook.com/v2.3/100000059371774/picture"
+                                        class="article-author-thumb" alt="">
+                                </div>
+                                <div class="article-header-text">
+                                    <a href="/users/92/kimmunsu" class="article-author-name">{{writer.name}}</a>
+                                    <a href="/questions/413" class="article-header-time" title="퍼머링크">
+                                        {{formattedCreateDate}}
+                                        <i class="icon-link"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="article-doc">
+                                {{contents}}
+                            </div>
+                            <div class="article-util">
+                                <ul class="article-util-list">
+                                    <li>
+                                        <a class="link-modify-article" href="/question/{{QuestId}}/form">수정</a>
+                                    </li>
+                                    <li>
+                                        <form class="form-delete" action="/question/delete/{{QuestId}}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button class="link-delete-article" type="submit">삭제</button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <a class="link-modify-article" href="/question/qnaList">목록</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
 
 
 
 
 
 
-              <div class="qna-comment">
-                  <div class="qna-comment-slipp">
-                      <p class="qna-comment-count"><strong>2</strong>개의 의견</p>
-                      <div class="qna-comment-slipp-articles">
+                        <div class="qna-comment">
+                            <div class="qna-comment-slipp">
+                                <p class="qna-comment-count"><strong>2</strong>개의 의견</p>
+                                <div class="qna-comment-slipp-articles">
 
-						{{#answers}}
-                          <article class="article" id="answer-1406">
-                              <div class="article-header">
-                                  <div class="article-header-thumb">
-                                      <img src="https://graph.facebook.com/v2.3/1324855987/picture" class="article-author-thumb" alt="">
-                                  </div>
-                                  <div class="article-header-text">
-                                      <a href="/users/1/자바지기" class="article-author-name">{{writer.name}}</a>
-                                      <a href="#answer-1434" class="article-header-time" title="퍼머링크">
-                                          {{formattedCreateDate}}
-                                      </a>
-                                  </div>
-                              </div>
-                              <div class="article-doc comment-doc">
-                                  <p>{{contents}}</p>
-                              </div>
-                              <div class="article-util">
-                                  <ul class="article-util-list">
-                                      <li>
-                                          <a class="link-modify-article" href="/questions/413/answers/1405/form">수정</a>
-                                      </li>
-                                      <li>
-										<a class="answer-delete-article" href="/api/question/{{question.QuestId}}/answers/{{id}}/delete">삭제</a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </article>
-                          {{/answers}}        
-                          <form class="answer-write" method="post" action="/api/question/{{QuestId}}/answers">
-                              <div class="form-group" style="padding:14px;">
-                                  <textarea class="form-control" placeholder="Update your status" name="contents"></textarea>
-                              </div>
-                              		<input type="submit" class="btn btn-success pull-right" value="답변하기">
-<!--                               <button class="btn btn-success pull-right" type="button">답변하기</button>  -->
-                              <div class="clearfix" />
-                          </form>
-                      </div>
-                  </div>
-              </div>
-          </div>
+                                    {{#answers}}
+                                    <article class="article" id="answer-1406">
+                                        <div class="article-header">
+                                            <div class="article-header-thumb">
+                                                <img src="https://graph.facebook.com/v2.3/1324855987/picture"
+                                                    class="article-author-thumb" alt="">
+                                            </div>
+                                            <div class="article-header-text">
+                                                <a href="/users/1/자바지기" class="article-author-name">{{writer.name}}</a>
+                                                <a href="#answer-1434" class="article-header-time" title="퍼머링크">
+                                                    {{formattedCreateDate}}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="article-doc comment-doc">
+                                            <p>{{contents}}</p>
+                                        </div>
+                                        <div class="article-util">
+                                            <ul class="article-util-list">
+                                                <li>
+                                                    <a class="link-modify-article"
+                                                        href="/questions/413/answers/1405/form">수정</a>
+                                                </li>
+                                                <li>
+                                                    <a class="answer-delete-article"
+                                                        href="/api/question/{{question.QuestId}}/answers/{{id}}/delete">삭제</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </article>
+                                    {{/answers}}
+                                    <form class="answer-write" method="post" action="/api/question/{{QuestId}}/answers">
+                                        <div class="form-group" style="padding:14px;">
+                                            <textarea class="form-control" placeholder="Update your status"
+                                                name="contents"></textarea>
+                                        </div>
+                                        <input type="submit" class="btn btn-success pull-right" value="답변하기">
+                                        <!--                               <button class="btn btn-success pull-right" type="button">답변하기</button>  -->
+                                        <div class="clearfix" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/question}}
+            </div>
         </div>
-        {{/question}}
-    </div>
-</div>
-	                     <script type="text/template" id="answerTemplate">
+        <script type="text/template" id="answerTemplate">
 							<article class="article">
 								<div class="article-header">
 									<div class="article-header-thumb">
@@ -127,6 +136,8 @@
 									</div>
 								</article>
 							</script>
-{{>include/footer}}
-	</body>
+        {{>include/footer}}
+    </div>
+</body>
+
 </html>
