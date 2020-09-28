@@ -1,17 +1,20 @@
 package com.mySlipp.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mySlipp.domain.Pages;
 import com.mySlipp.domain.Question;
 import com.mySlipp.domain.QuestionRepository;
 import com.mySlipp.domain.User;
+
 
 @Controller
 @RequestMapping("/question")
@@ -19,9 +22,17 @@ public class QnaController {
 	@Autowired
 	private QuestionRepository questionRepository;
 	
-	@RequestMapping("/qnaList")
-	public String QnAHome(Model model){
-		model.addAttribute("questions",questionRepository.findAll());
+	@RequestMapping("/qnaList/{currentPage}")
+	public String QnAHome(@PathVariable int currentPage, Model model){
+		List<Question> questionAllList = questionRepository.findAll();
+		int onePageList = 5;
+		Pages pages = new Pages(1, questionAllList.size(),  onePageList,currentPage);
+		
+		List<Question> questionList =  pages.getOnePageList(questionAllList);
+
+		List<Integer> pagesList = pages.getPagesList();
+		model.addAttribute("pages",pagesList);
+		model.addAttribute("questions",questionList);
 		return "/qna/qnaList";
 	}
 	
@@ -42,7 +53,7 @@ public class QnaController {
 		Question newQuestion = new Question(sessionUser, title, contents);
 		questionRepository.save(newQuestion);
 		System.out.println(newQuestion);
-		return "redirect:/question/qnaList";
+		return "redirect:/question/qnaList/1";
 	}
 	
 	@RequestMapping("/{QuestId}")
@@ -84,7 +95,7 @@ public class QnaController {
 			Question question = questionRepository.findById(QuestId).get();
 			hasPermission(session, question);
 			questionRepository.deleteById(QuestId);
-			return "redirect:/question/qnaList";
+			return "redirect:/question/qnaList/1";
 
 		}catch(IllegalStateException e){
 			return "redirect:/user/login";

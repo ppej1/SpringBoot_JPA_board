@@ -18,7 +18,7 @@
                             <div class="wrap">
                                 <div class="main">
                                     <strong class="subject">
-                                        <a href="/question/{{QuestId}}">{{title}}</a>
+                                        <a href="/question/{{QuestId}}">{{title}}  ({{countOfAnswer}})</a>
                                     </strong>
                                     <div class="auth-info">
                                         <i class="icon-add-comment"></i>
@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="reply" title="댓글">
                                         <i class="icon-reply"></i>
-                                        <span class="point">{{countOfAnswer}}</span>
+                                        <span class="point">{{QuestId}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -39,11 +39,9 @@
                         <div class="col-md-6 text-center">
                             <ul class="pagination center-block" style="display:inline-block;">
                                 <li><a href="#">«</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
+                                {{#pages}}
+                                <li><a href="/question/qnaList/{{.}}">{{.}}</a></li>
+                                {{/pages}}
                                 <li><a href="#">»</a></li>
                             </ul>
                         </div>

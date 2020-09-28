@@ -9,8 +9,8 @@
 		<div class="collapse navbar-collapse" id="navbar-collapse1">
 			<ul class="nav navbar-nav navbar-right">
 				{{^sessionUser}}
-				<li><a href="/user/loginForm" role="button">로그인</a></li>
-				<li><a href="/user/register" role="button">회원가입</a></li>
+				<li><a href="/user/loginForm" role="button">Log In</a></li>
+				<li><a href="/user/register" role="button">Register</a></li>
 				{{/sessionUser}}
 				{{#sessionUser}}
 				<li>
@@ -18,8 +18,8 @@
 							class="glyphicon glyphicon-bell"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/">TiME</a></li>
-						<li><a href="/user/logout" role="button">로그아웃</a></li>
-						<li><a href="/user/{{id}}/form" role="button">개인정보수정</a></li>
+						<li><a href="/user/logout" role="button">Log Out</a></li>
+						<li><a href="/user/{{id}}/form" role="button">Edit Profile</a></li>
 					</ul>
 				</li>
 				<li><a href="/user/list"><i class="glyphicon glyphicon-user"></i></a></li>
@@ -32,8 +32,7 @@
 	<div class="col-md-12">
 		<div class="collapse navbar-collapse" id="navbar-collapse2">
 			<ul class="nav navbar-nav navbar-left">
-				<li class="active"><a href="/aboutMe">AboutMe</a></li>
-				<li class="active"><a href="/question/qnaList">Posts</a></li>
+				<li class="active"><a href="/question/qnaList/1">Posts</a></li>
 
 			</ul>
 		</div>
