@@ -23,6 +23,9 @@ function onSuccess(data, status){
 	var template = answerTemplate.format(data.writer.name, data.formattedCreateDate, data.contents, data.question.QuestId, data.id);
 	$(".qna-comment-slipp-articles").prepend(template)
 	$(".answer-write textarea").val('');
+	var comment = $(".qna-comment-count strong").html();
+	var cnt = parseInt(comment)+1;
+	$(".qna-comment-count strong").html(cnt);
 }
 
 $(".answer-delete-article").click(deleteAnswer);
@@ -41,12 +44,18 @@ function deleteAnswer(e){
 			console.log("error");
 		},
 		success : function(data,status){
+			var comment = $(".qna-comment-count strong").html();
+			var cnt = parseInt(comment)-1;
+			$(".qna-comment-count strong").html(cnt);	
 			console.log(data);
 			if(data.valid){
 				deleteBtn.closest("article").remove();
 			}else{
 				alert(data.errorMessage);
 			}
+
+			//var cnt = parseInt(a)-1;
+			//$(".qna-comment-count strong").html(cnt);
 		}
 	});
 	

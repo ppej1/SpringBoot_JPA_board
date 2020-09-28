@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+
+import org.hibernate.annotations.Cascade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -36,7 +39,7 @@ public class Question {
 	private String contents;
 	
 	private LocalDateTime createDate;
-	@OneToMany(mappedBy= "question")
+	@OneToMany(mappedBy= "question",cascade = CascadeType.ALL)
 	@OrderBy("id DESC")
 	private List<Answer> answers;
 	

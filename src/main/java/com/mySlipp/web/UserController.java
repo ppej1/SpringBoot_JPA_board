@@ -29,9 +29,13 @@ public class UserController {
 	}
 	@RequestMapping("/create")
 	public String createUser(User user){
-		System.out.println(user);
-		userRepository.save(user);
-		return "redirect:/";
+		try{
+			System.out.println(user);
+			userRepository.save(user);
+			return "redirect:/";
+		}catch (Exception e) {
+			return "/user/form";
+		}
 	}
 	@RequestMapping("/loginForm")
 	public String loginPage(){
