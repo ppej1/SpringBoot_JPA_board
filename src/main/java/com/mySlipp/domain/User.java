@@ -16,56 +16,70 @@ public class User {
 	private Long id;
 	@JsonProperty
 	@Column(nullable=false, length=20, unique=true)	
-	private String userId;
+	private String email;
 	
 	private String password;
 	@JsonProperty
-	@Column(nullable=false, length=20, unique=true)	
-	private String name;
+	@Column(nullable=false, length=20)	
+	private String firstName;
 	@JsonProperty
-	@Column(nullable=false, length=20, unique=true)	
-	private String email;
+	@Column(nullable=false, length=20)	
+	private String lastName;
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setEmail(String email) {
-		this.email = email;
+	
+	public void update(User updateUser) {
+		this.password = updateUser.password;
+		this.firstName = updateUser.firstName;
+		this.lastName = updateUser.lastName;
+		this.email = updateUser.email;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("User [id=%s, email=%s, password=%s, firstName=%s, lastName=%s]", id, email, password,
+				firstName, lastName);
+	}
+
 	public Long getId() {
 		return id;
 	}
 
-	public String getUserId() {
-		return userId;
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public String getName() {
-		return name;
-	}
+
 	public String getEmail() {
 		return email;
 	}
-	@Override
-	public String toString() {
-		return String.format("User [userId=%s, password=%s, name=%s, email=%s]", userId, password, name, email);
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
-	public void update(User updateUser) {
-		this.password = updateUser.password;
-		this.name = updateUser.name;
-		this.email = updateUser.email;
+
+	public String getPassword() {
+		return password;
 	}
-	
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public boolean matchPassword(String newPassword){
 		if(newPassword == null){
 			return false;

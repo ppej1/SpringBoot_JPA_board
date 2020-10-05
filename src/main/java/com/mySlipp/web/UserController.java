@@ -42,8 +42,8 @@ public class UserController {
 		return "/user/login";
 	}
 	@RequestMapping("/login")
-	public String login(String userId,String password, HttpSession session){
-		User user = userRepository.findByUserId(userId);
+	public String login(String email,String password, HttpSession session){
+		User user = userRepository.findByEmail(email);
 		if(user== null){
 			return "redirect:/user/loginForm";
 		}
@@ -59,8 +59,10 @@ public class UserController {
 		session.removeAttribute(HttpSessionUtils.USER_SESSION_KEY);
 		return "redirect:/";
 	}
-	@RequestMapping("/profile")
-	public String profilePage(){
+	@RequestMapping("/{id}/profile")
+	public String profilePage(@PathVariable Long id, Model model, HttpSession session){
+		User user = userRepository.findById(id).get(); 
+		model.addAttribute("user", user);
 		return "/user/profile";
 	}
 	@RequestMapping("/{id}/form")

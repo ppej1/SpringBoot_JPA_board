@@ -20,7 +20,7 @@ function onError(){
 function onSuccess(data, status){
 	console.log(data);
 	var answerTemplate = $("#answerTemplate").html();
-	var template = answerTemplate.format(data.writer.name, data.formattedCreateDate, data.contents, data.question.QuestId, data.id);
+	var template = answerTemplate.format(data.writer.firstName, data.formattedCreateDate, data.contents, data.question.QuestId, data.id);
 	$(".qna-comment-slipp-articles").prepend(template)
 	$(".answer-write textarea").val('');
 	var comment = $(".qna-comment-count strong").html();
@@ -53,12 +53,8 @@ function deleteAnswer(e){
 			}else{
 				alert(data.errorMessage);
 			}
-
-			//var cnt = parseInt(a)-1;
-			//$(".qna-comment-count strong").html(cnt);
 		}
 	});
-	
 }
 
 

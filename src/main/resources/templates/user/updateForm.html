@@ -15,9 +15,9 @@
                     <form name="question" method="post" action="/user/update/{{id}}">
                         <input type="hidden" name="id" value="{{id}}" />
                         <div class="form-group">
-                            <label for="userId">사용자 아이디</label>
-                            <input class="form-control" id="userId" name="userId" placeholder="User ID"
-                                value="{{user.userId}}">
+                            <label for="email">사용자 이메일</label>
+                            <input class="form-control" id="email" name="email" placeholder="User email"
+                                value="{{user.email}}" readonly="readonly">
                         </div>
                         <div class="form-group">
                             <label for="password">비밀번호</label>
@@ -25,13 +25,10 @@
                                 placeholder="Password">
                         </div>
                         <div class="form-group">
-                            <label for="name">이름</label>
-                            <input class="form-control" id="name" name="name" placeholder="Name" value="{{user.name}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">이메일</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
-                                value="{{user.email}}">
+                            <label for="name">성</label>
+                            <input class="form-control" id="firstName" name="firstName" placeholder="firstName" value="{{user.firstName}}">
+                            <label for="lastName">이름</label>
+                            <input class="form-control" id="lastName" name="lastName" placeholder="lastName" value="{{user.lastName}}">
                         </div>
                         <button type="submit" class="btn btn-success clearfix pull-right">개인정보수정</button>
                         <div class="clearfix">
