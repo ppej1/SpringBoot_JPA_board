@@ -12,7 +12,7 @@ import com.mySlipp.domain.AnswerRepository;
 import com.mySlipp.domain.Question;
 import com.mySlipp.domain.QuestionRepository;
 import com.mySlipp.domain.Result;
-import com.mySlipp.domain.User;
+import com.mySlipp.domain.userInfo;
 
 @RestController
 @RequestMapping("api/question/{QuestId}/answers")
@@ -29,7 +29,7 @@ public class ApiAnswerController {
 		if(!HttpSessionUtils.isLoginUser(session)){
 			return null;
 		}
-		User loginUser = HttpSessionUtils.getUserFromSession(session);
+		userInfo loginUser = HttpSessionUtils.getUserFromSession(session);
 		Question question = questionRepository.findById(QuestId).get();
 		Answer answer = new Answer(loginUser, question,contents);
 		question.addAnswer();
@@ -43,7 +43,7 @@ public class ApiAnswerController {
 			return  Result.fail("로그인해야 합니다");
 		}
 		Answer answer = answerRepository.findById(id).get();
-		User loginUser = HttpSessionUtils.getUserFromSession(session);
+		userInfo loginUser = HttpSessionUtils.getUserFromSession(session);
 		if(!answer.isSameWriter(loginUser)){
 			return  Result.fail("자신의 글만 삭제할 수 있습니다.");
 		}

@@ -24,7 +24,7 @@
                                         class="article-author-thumb" alt="">
                                 </div>
                                 <div class="article-header-text">
-                                    <a href="/user/{{writer.id}}/profile" class="article-author-name">{{writer.firstName}}</a>
+                                    <a href="/user/{{writer.user_id}}/profile" class="article-author-name">{{writer.firstName}}</a>
                                     <a href="/questions/413" class="article-header-time" title="퍼머링크">
                                         {{formattedCreateDate}}
                                         <i class="icon-link"></i>
@@ -70,7 +70,7 @@
                                                     class="article-author-thumb" alt="">
                                             </div>
                                             <div class="article-header-text">
-                                                <a href="/user/{{writer.id}}/profile" class="article-author-name">{{writer.firstName}}</a>
+                                                <a href="/user/{{writer.user_id}}/profile" class="article-author-name">{{writer.firstName}}</a>
                                                 <a href="#answer-1434" class="article-header-time" title="퍼머링크">
                                                     {{formattedCreateDate}}
                                                 </a>
@@ -117,20 +117,20 @@
 										<img src="https://graph.facebook.com/v2.3/1324855987/picture" class="article-author-thumb" alt="">
 									</div>
 									<div class="article-header-text">
-										<a href="#" class="article-author-name">{0}</a>
-										<div class="article-header-time">{1}</div>
+										<a href="/user/{0}/profile" class="article-author-name">{1}</a>
+										<div class="article-header-time">{2}</div>
 									</div>
 								</div>
 									<div class="article-doc comment-doc">
-									{2}
+									{3}
 									</div>
 									<div class="article-util">
 										<ul class="article-util-list">
 											<li>
-												<a class="answer-modify-article" href="/api/question/{3}/answers/{4}/update">수정</a>
+												<a class="answer-modify-article" href="/api/question/{4}/answers/{5}/update">수정</a>
 											</li>
 											<li>
-												<a class="answer-delete-article" href="/api/question/{3}/answers/{4}/delete">삭제</a>
+												<a class="answer-delete-article" href="/api/question/{4}/answers/{5}/delete">삭제</a>
 											</li>
 										</ul>
 									</div>

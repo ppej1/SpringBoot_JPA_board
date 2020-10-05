@@ -2,7 +2,7 @@ package com.mySlipp.web;
 
 import javax.servlet.http.HttpSession;
 
-import com.mySlipp.domain.User;
+import com.mySlipp.domain.userInfo;
 
 public class HttpSessionUtils {
 	public static final String USER_SESSION_KEY ="sessionUser";
@@ -15,11 +15,11 @@ public class HttpSessionUtils {
 		return true;
 	}
 	
-	public static User getUserFromSession(HttpSession session){
+	public static userInfo getUserFromSession(HttpSession session){
 		if(!isLoginUser(session)){
 			return null;
 		}
-		return (User)session.getAttribute(USER_SESSION_KEY);
+		return (userInfo)session.getAttribute(USER_SESSION_KEY);
 			
 	}
 }

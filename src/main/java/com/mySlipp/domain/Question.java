@@ -31,7 +31,7 @@ public class Question {
 	@ManyToOne
 	@JsonProperty
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_question_writer"))
-	private User writer;
+	private userInfo writer;
 	@JsonProperty
 	private String title;
 	@Lob
@@ -48,7 +48,7 @@ public class Question {
 	
 	
 	public Question(){}
-	public Question(User writer, String title, String contents) {
+	public Question(userInfo writer, String title, String contents) {
 		this.writer = writer;
 		this.title = title;
 		this.contents = contents;
@@ -70,7 +70,7 @@ public class Question {
 		this.title = title;
 		this.contents =contents;
 	}
-	public boolean isSameWriter(User loginUser) {
+	public boolean isSameWriter(userInfo loginUser) {
 		
 		return this.writer.equals(loginUser);
 	}

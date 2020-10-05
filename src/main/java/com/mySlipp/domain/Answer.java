@@ -24,7 +24,7 @@ public class Answer {
 	@ManyToOne
 	@JsonProperty
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_writer"))
-	private User writer;
+	private userInfo writer;
 	
 	@ManyToOne
 	@JsonProperty
@@ -47,7 +47,7 @@ public class Answer {
 	}
 	
 	
-	public Answer(User writer, Question question ,String contents) {
+	public Answer(userInfo writer, Question question ,String contents) {
 		this.writer = writer;
 		this.question = question;
 		this.contents = contents;
@@ -81,7 +81,7 @@ public class Answer {
 		return String.format("Answer [id=%s, writer=%s, contents=%s, createDate=%s]", id, writer, contents, createDate);
 	}
 
-	public boolean isSameWriter(User loginUser) {	
+	public boolean isSameWriter(userInfo loginUser) {	
 		return loginUser.equals(this.writer);
 	}
 

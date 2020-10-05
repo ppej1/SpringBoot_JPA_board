@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mySlipp.domain.Pages;
 import com.mySlipp.domain.Question;
 import com.mySlipp.domain.QuestionRepository;
-import com.mySlipp.domain.User;
+import com.mySlipp.domain.userInfo;
 
 
 @Controller
@@ -49,7 +49,7 @@ public class QnaController {
 		if(!HttpSessionUtils.isLoginUser(session)){
 			return "redircet:/user/loginForm";
 		}
-		User sessionUser = HttpSessionUtils.getUserFromSession(session);
+		userInfo sessionUser = HttpSessionUtils.getUserFromSession(session);
 		Question newQuestion = new Question(sessionUser, title, contents);
 		questionRepository.save(newQuestion);
 		System.out.println(newQuestion);
@@ -107,7 +107,7 @@ public class QnaController {
 		if(!HttpSessionUtils.isLoginUser(session)){
 			throw new IllegalStateException("로그인이 필요합니다");
 		}
-		User loginUser = HttpSessionUtils.getUserFromSession(session);
+		userInfo loginUser = HttpSessionUtils.getUserFromSession(session);
 		if(!question.isSameWriter(loginUser)){
 			throw new IllegalStateException("자신이 쓴 글만 수정, 삭제가 가능합니다.");
 		}

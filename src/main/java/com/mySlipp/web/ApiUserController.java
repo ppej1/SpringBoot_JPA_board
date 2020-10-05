@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mySlipp.domain.User;
+import com.mySlipp.domain.userInfo;
 import com.mySlipp.domain.UserRepository;
 
 @RestController
@@ -15,7 +15,7 @@ public class ApiUserController {
 	private UserRepository userRepository;
 	
 	@RequestMapping("/{id}")
-	public User show(@PathVariable Long id){
+	public userInfo show(@PathVariable Long id){
 		return userRepository.findById(id).get();
 	}
 }

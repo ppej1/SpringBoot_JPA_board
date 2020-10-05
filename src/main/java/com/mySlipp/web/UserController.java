@@ -11,13 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mySlipp.domain.User;
+import com.mySlipp.domain.userInfo;
 import com.mySlipp.domain.UserRepository;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	private List<User> users = new ArrayList<User>();
+	private List<userInfo> users = new ArrayList<userInfo>();
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -28,7 +28,7 @@ public class UserController {
 		return "/user/form";
 	}
 	@RequestMapping("/create")
-	public String createUser(User user){
+	public String createUser(userInfo user){
 		try{
 			System.out.println(user);
 			userRepository.save(user);
@@ -42,12 +42,13 @@ public class UserController {
 		return "/user/login";
 	}
 	@RequestMapping("/login")
-	public String login(String email,String password, HttpSession session){
-		User user = userRepository.findByEmail(email);
+	public String login(String email,String pwd, HttpSession session){
+		userInfo user = userRepository.findByEmail(email);
+		System.out.println(user);
 		if(user== null){
 			return "redirect:/user/loginForm";
 		}
-		if(!user.matchPassword(password)){
+		if(!user.matchPassword(pwd)){
 			return "redirect:/user/loginForm";
 		}
 		session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, user);
@@ -59,36 +60,36 @@ public class UserController {
 		session.removeAttribute(HttpSessionUtils.USER_SESSION_KEY);
 		return "redirect:/";
 	}
-	@RequestMapping("/{id}/profile")
-	public String profilePage(@PathVariable Long id, Model model, HttpSession session){
-		User user = userRepository.findById(id).get(); 
+	@RequestMapping("/{user_id}/profile")
+	public String profilePage(@PathVariable Long user_id, Model model, HttpSession session){
+		userInfo user = userRepository.findById(user_id).get(); 
 		model.addAttribute("user", user);
 		return "/user/profile";
 	}
-	@RequestMapping("/{id}/form")
-	public String updateForm(@PathVariable Long id, Model model, HttpSession session){
+	@RequestMapping("/{user_id}/form")
+	public String updateForm(@PathVariable Long user_id, Model model, HttpSession session){
 		if(!HttpSessionUtils.isLoginUser(session)){
 			return "redirect:/user/login";
 		}
-		User loginUser = HttpSessionUtils.getUserFromSession(session);
-		if(!loginUser.matchId(id)){
+		userInfo loginUser = HttpSessionUtils.getUserFromSession(session);
+		if(!loginUser.matchId(user_id)){
 			return "redirect:/";
 		}
-		User user = userRepository.findById(id).get(); 
+		userInfo user = userRepository.findById(user_id).get(); 
 		model.addAttribute("user", user);
 		return "/user/updateForm";
 	}
-	@RequestMapping("/update/{id}")
-	public String UpdateUser(@PathVariable Long id, User updateUser, HttpSession session){
+	@RequestMapping("/update/{user_id}")
+	public String UpdateUser(@PathVariable Long user_id, userInfo updateUser, HttpSession session){
 		if(!HttpSessionUtils.isLoginUser(session)){
 			return "redirect:/user/login";
 		}
-		User loginUser = HttpSessionUtils.getUserFromSession(session);
-		if(!loginUser.matchId(id)){
+		userInfo loginUser = HttpSessionUtils.getUserFromSession(session);
+		if(!loginUser.matchId(user_id)){
 			return "redirect:/";
 		}
 		
-		User user = userRepository.findById(id).get(); 
+		userInfo user = userRepository.findById(user_id).get(); 
 		user.update(updateUser);
 		System.out.println(user);
 		userRepository.save(user);

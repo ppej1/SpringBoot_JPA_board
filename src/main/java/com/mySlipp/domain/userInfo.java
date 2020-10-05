@@ -9,16 +9,16 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-public class User {
+public class userInfo {
 	@Id
 	@JsonProperty
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	private Long id;
+	private Long user_id;
 	@JsonProperty
 	@Column(nullable=false, length=20, unique=true)	
 	private String email;
 	
-	private String password;
+	private String pwd;
 	@JsonProperty
 	@Column(nullable=false, length=20)	
 	private String firstName;
@@ -27,8 +27,8 @@ public class User {
 	private String lastName;
 	
 	
-	public void update(User updateUser) {
-		this.password = updateUser.password;
+	public void update(userInfo updateUser) {
+		this.pwd = updateUser.pwd;
 		this.firstName = updateUser.firstName;
 		this.lastName = updateUser.lastName;
 		this.email = updateUser.email;
@@ -36,16 +36,8 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return String.format("User [id=%s, email=%s, password=%s, firstName=%s, lastName=%s]", id, email, password,
+		return String.format("User [id=%s, email=%s, pwd=%s, firstName=%s, lastName=%s]", user_id, email, pwd,
 				firstName, lastName);
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getEmail() {
@@ -56,12 +48,20 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public Long getUser_id() {
+		return user_id;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	public String getFirstName() {
@@ -84,19 +84,19 @@ public class User {
 		if(newPassword == null){
 			return false;
 		}
-		return newPassword.equals(this.password);
+		return newPassword.equals(this.pwd);
 	}
 	public boolean matchId(Long newId){
 		if(newId == null){
 			return false;
 		}
-		return newId.equals(this.id);
+		return newId.equals(this.user_id);
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((user_id == null) ? 0 : user_id.hashCode());
 		return result;
 	}
 	@Override
@@ -107,11 +107,11 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
-		if (id == null) {
-			if (other.id != null)
+		userInfo other = (userInfo) obj;
+		if (user_id == null) {
+			if (other.user_id != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!user_id.equals(other.user_id))
 			return false;
 		return true;
 	}	
